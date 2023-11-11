@@ -9,11 +9,15 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  Alert,
+  Image,
 } from "react-native";
+import styles from "./styles";
 
 export default function App() {
   const [name, setName] = useState("Programming Language");
   const [age, setAge] = useState(26);
+  const [gender, setGender] = useState("");
 
   const [person, setPerson] = useState({ name: "EdricPhan", age: 25 });
 
@@ -39,6 +43,36 @@ export default function App() {
 
   const pressHandler = (_name) => {
     console.log("Press::::", _name);
+  };
+
+  const ageHandler = () => {
+    if (age > 21) {
+      Alert.alert("Yay!!, You can drink !!!");
+    } else {
+      Alert.alert("oops, Sorry, you can not drink !!!");
+    }
+  };
+
+  const [dice, setDice] = useState(1);
+
+  const images = {
+    pics: {
+      0: require("./assets/adaptive-icon.png"),
+      1: require("./assets/favicon.png"),
+      2: require("./assets/icon.png"),
+      3: require("./assets/splash.png"),
+    },
+  };
+
+  const pressHandlerV2 = () => {
+    Alert.alert("Details", "Are you sure you want to submit ?", [
+      { text: "Yes", onPress: () => console.log("Yes is pressed") },
+      { text: "No", onPress: () => noHandler() },
+    ]);
+  };
+
+  const noHandler = () => {
+    setName(""), setAge(""), setGender("");
   };
 
   return (
@@ -80,10 +114,41 @@ export default function App() {
             </View>
           );
         })} */}
+
+        <TextInput style={styles.input_v2} />
+        <TextInput style={styles.input_v2} onChangeText={(text) => setAge(text)} />
+        <Button title="Can I Drink" onPress={() => ageHandler()} />
+
+        <View style={styles.img}>
+          <Image source={require("./assets/favicon.png")} />
+        </View>
+
+        {/* <Image source={images.pics[dice]} />
+        <Button title="Roll" onPress={() => setDice(Math.floor(Math.random() * 6))} /> */}
+
+        <TextInput
+          style={styles.input_v3}
+          placeholder="Name"
+          onChangeText={(text) => setName(text)}
+        />
+        <TextInput
+          style={styles.input_v3}
+          placeholder="Age"
+          onChangeText={(text) => setAge(text)}
+        />
+        <TextInput
+          style={styles.input_v3}
+          placeholder="Gender"
+          onChangeText={(text) => setGender(text)}
+        />
+        <Button title="Submit" onPress={() => pressHandlerV2()} />
+        <Text style={styles.marginCustom}>
+          {name} {age} {gender}
+        </Text>
       </ScrollView>
 
       {/* Khong can ScrollView */}
-      <FlatList
+      {/* <FlatList
         // Nhu key trong array.map()
         keyExtractor={(item) => item.id}
         data={fruits}
@@ -94,41 +159,9 @@ export default function App() {
             </TouchableOpacity>
           </View>
         )}
-      />
+      /> */}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    // alignItems: "center",
-    // justifyContent: "center",
-  },
-  textStyle: {
-    fontSize: 20,
-    color: "blue",
-    fontWeight: "bold",
-    fontStyle: "italic",
-  },
-  button: {
-    backgroundColor: "red",
-    padding: 10,
-    margin: 10,
-  },
-  input: {
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 10,
-    margin: 10,
-    width: 150,
-  },
-
-  item: {
-    fontSize: 22,
-    backgroundColor: "yellow",
-    marginTop: 20,
-    padding: 20,
-  },
-});
+// 2:09:53
