@@ -14,9 +14,13 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   button: {
-    backgroundColor: "red",
-    padding: 10,
-    margin: 10,
+    backgroundColor: "yellow",
+    padding: 20,
+    margin: 30,
+    alignItems: "center",
+    borderWidth: 3,
+    borderColor: "green",
+    borderRadius: 20,
   },
   input: {
     borderColor: "black",
