@@ -3,18 +3,19 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "yellow",
     // alignItems: "center",
     // justifyContent: "center",
-    flexDirection: "row",
+    // flexDirection: "row",
   },
   textStyle: {
     fontSize: 30,
     color: "blue",
     fontWeight: "bold",
     fontStyle: "italic",
-    padding: 10,
+    padding: 20,
     margin: 10,
+    // backgroundColor: "yellow",
   },
   button: {
     backgroundColor: "yellow",
@@ -56,8 +57,8 @@ const styles = StyleSheet.create({
 
   img: {
     marginHorizontal: 40,
-    width: 200,
-    height: 200,
+    width: 80,
+    height: 80,
   },
 
   marginCustom: {
@@ -73,6 +74,13 @@ const styles = StyleSheet.create({
     backgroundColor: "yellow",
     padding: 20,
     marginVertical: 10,
+  },
+  text: {
+    color: "blue",
+    fontFamily: "PingFang SC",
+    textDecorationLine: "line-through",
+    textDecorationColor: 'red',
+    textDecorationStyle: "dashed"
   },
 });
 
