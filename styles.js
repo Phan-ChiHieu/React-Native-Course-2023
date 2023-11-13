@@ -6,12 +6,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     // alignItems: "center",
     // justifyContent: "center",
+    flexDirection: "row",
   },
   textStyle: {
-    fontSize: 20,
+    fontSize: 30,
     color: "blue",
     fontWeight: "bold",
     fontStyle: "italic",
+    padding: 10,
+    margin: 10,
   },
   button: {
     backgroundColor: "yellow",
@@ -59,6 +62,17 @@ const styles = StyleSheet.create({
 
   marginCustom: {
     marginBottom: 100,
+  },
+  header: {
+    fontSize: 30,
+  },
+  title: {
+    fontSize: 20,
+  },
+  item: {
+    backgroundColor: "yellow",
+    padding: 20,
+    marginVertical: 10,
   },
 });
 
