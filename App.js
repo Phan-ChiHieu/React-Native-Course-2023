@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -21,8 +21,11 @@ import {
   InputAccessoryView,
   Appearance,
   useColorScheme,
+  Platform,
+  Animated,
+  ActionSheetIOS,
 } from "react-native";
-import styles from "./styles";
+import styles, { styled } from "./styles";
 
 export default function App() {
   // const [number, setNumber] = useState(0);
@@ -92,6 +95,47 @@ export default function App() {
   // const isDarkMode = currentColorScheme === "dark";
 
   // End Cach 2
+
+  const fadeAmin = useRef(new Animated.Value(0)).current;
+
+  const fadeIn = () => {
+    Animated.timing(fadeAmin, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const fadeOut = () => {
+    Animated.timing(fadeAmin, {
+      toValue: 0,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const [result, setResult] = useState(0);
+
+  const onPress = () => {
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: ["Cancel", "Generate Number", "Reset"],
+        destructiveButtonIndex: 2,
+        cancelButtonIndex: 0,
+        userInterfaceStyle: "dark",
+        title: "Generate Number",
+        message: "Generate ramdom Number",
+      },
+      (buttonIndex) => {
+        if (buttonIndex === 0) {
+        } else if (buttonIndex === 1) {
+          setResult(Math.floor(Math.random() * 100) + 1);
+        } else if (buttonIndex === 2) {
+          setResult("Random Number");
+        }
+      }
+    );
+  };
 
   return (
     // <TouchableWithoutFeedback
@@ -203,44 +247,88 @@ export default function App() {
 
     //   <Image style={styles.img} source={require("./assets/favicon.png")} resizeMode="contain" />
     // </SafeAreaView>
-    <SafeAreaView
-      style={{
-        flex: 1,
-        padding: 20,
-        backgroundColor: !isDarkMode ? "white" : "gray",
-      }}
-    >
-      <TextInput
-        style={{
-          marginTop: 20,
-          backgroundColor: !isDarkMode ? "gray" : "white",
-          color: !isDarkMode ? "white" : "black",
-          padding: 20,
-        }}
-        placeholder="Enter your name"
-        onChangeText={(text) => setName(text)}
-      />
-      <TextInput
-        style={{
-          marginTop: 20,
-          backgroundColor: !isDarkMode ? "gray" : "white",
-          color: !isDarkMode ? "white" : "black",
-          padding: 20,
-        }}
-        placeholder="Enter your age"
-        onChangeText={(age) => setAge(age)}
-      />
-      <Text
-        style={{
-          fontSize: 20,
-          marginTop: 20,
-          color: !isDarkMode ? "black" : "white",
-        }}
-      >
-        My name: {name} and age: {age}
-      </Text>
-    </SafeAreaView>
+    // <SafeAreaView
+    //   style={{
+    //     flex: 1,
+    //     padding: 20,
+    //     backgroundColor: !isDarkMode ? "white" : "gray",
+    //   }}
+    // >
+    //   <TextInput
+    //     style={{
+    //       marginTop: 20,
+    //       backgroundColor: !isDarkMode ? "gray" : "white",
+    //       color: !isDarkMode ? "white" : "black",
+    //       padding: 20,
+    //     }}
+    //     placeholder="Enter your name"
+    //     onChangeText={(text) => setName(text)}
+    //   />
+    //   <TextInput
+    //     style={{
+    //       marginTop: 20,
+    //       backgroundColor: !isDarkMode ? "gray" : "white",
+    //       color: !isDarkMode ? "white" : "black",
+    //       padding: 20,
+    //     }}
+    //     placeholder="Enter your age"
+    //     onChangeText={(age) => setAge(age)}
+    //   />
+    //   <Text
+    //     style={{
+    //       fontSize: 20,
+    //       marginTop: 20,
+    //       color: !isDarkMode ? "black" : "white",
+    //     }}
+    //   >
+    //     My name: {name} and age: {age}
+    //   </Text>
+    // </SafeAreaView>
+
+    // <SafeAreaView style={styles.container}>
+    //   <Text>OS</Text>
+    //   <Text>{Platform.OS}</Text>
+
+    //   <Text>OS Version</Text>
+    //   <Text>{Platform.Version}</Text>
+
+    //   <Text>isTV</Text>
+    //   <Text>{Platform.isTV.toString()}</Text>
+
+    //   {Platform.OS === "ios" && (
+    //     <>
+    //       <Text>isPad</Text>
+    //       <Text>{Platform.isPad.toString()}</Text>
+    //     </>
+    //   )}
+
+    //   <Text>Constant</Text>
+    //   <Text>{JSON.stringify(Platform.constants, null, 2)}</Text>
+    // </SafeAreaView>
+
+    // <SafeAreaView style={styles.container}>
+    //   <Animated.View
+    //     style={[
+    //       styles.item,
+    //       {
+    //         opacity: fadeAmin,
+    //       },
+    //     ]}
+    //   >
+    //     <Text style={styles.title}>Phan Chi Hieu</Text>
+    //   </Animated.View>
+    //   <View>
+    //     <Button title="Fade In" onPress={fadeIn} />
+    //     <Button title="Fade Out" onPress={fadeOut} />
+    //   </View>
+    // </SafeAreaView>
+    <View style={styled.container}>
+      {/* <Text style={styled.label}>I am a native label</Text> */}
+
+      <Text style={styles.result}>{result}</Text>
+      <Button title="Show Action Sheet" onPress={onPress} />
+    </View>
   );
 }
 
-// 6:00
+// 7:47

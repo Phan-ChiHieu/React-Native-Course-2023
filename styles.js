@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform, PlatformColor } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -79,9 +79,33 @@ const styles = StyleSheet.create({
     color: "blue",
     fontFamily: "PingFang SC",
     textDecorationLine: "line-through",
-    textDecorationColor: 'red',
-    textDecorationStyle: "dashed"
+    textDecorationColor: "red",
+    textDecorationStyle: "dashed",
   },
 });
 
 export default styles;
+
+export const styled = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  label: {
+    padding: 20,
+    ...Platform.select({
+      ios: {
+        color: PlatformColor("label"),
+        backgroundColor: PlatformColor("systemBrown"),
+      },
+      android: {
+        color: PlatformColor("?android:attr/textColor"),
+        backgroundColor: PlatformColor("@android:color/holo_blue_bright"),
+      },
+      default: {
+        color: "black",
+      },
+    }),
+  },
+});
