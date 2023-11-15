@@ -24,8 +24,10 @@ import {
   Platform,
   Animated,
   ActionSheetIOS,
+  Vibration,
 } from "react-native";
 import styles, { styled } from "./styles";
+import Slider from "@react-native-community/slider";
 
 export default function App() {
   // const [number, setNumber] = useState(0);
@@ -136,6 +138,60 @@ export default function App() {
       }
     );
   };
+
+  const onLongPress = () => {
+    //
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: ["Cancel", "Clear Text"],
+        destructiveButtonIndex: 1,
+        cancelButtonIndex: 0,
+        userInterfaceStyle: "dark",
+      },
+      (buttonIndex) => {
+        //
+        if (buttonIndex === 0) {
+        } else if (buttonIndex === 1) {
+          setName("");
+        }
+      }
+    );
+  };
+
+  const clickMe = () => {
+    //
+    Alert.prompt(
+      "Welcome",
+      "Please enter your name",
+      [
+        {
+          text: "Submit",
+          onPress: (text) => setName(text),
+        },
+        {
+          text: "Cancle",
+          onPress: () => console.log("Cancle is pressed"),
+        },
+      ],
+      //  text
+      // "plain-text",
+
+      // password
+      // "secure-text",
+
+      // login and password
+      "login-password",
+      "Name"
+    );
+  };
+
+  // const ONE_SECOND_IN_MS = 1000;
+
+  // const PATTERN = [1 * ONE_SECOND_IN_MS, 2 * ONE_SECOND_IN_MS, 3 * ONE_SECOND_IN_MS];
+
+  // const PATTERN_DESC = "Wait 1s, vibrate 2s, wait 3s";
+
+  const [range, setRange] = useState(0);
 
   return (
     // <TouchableWithoutFeedback
@@ -325,10 +381,66 @@ export default function App() {
     <View style={styled.container}>
       {/* <Text style={styled.label}>I am a native label</Text> */}
 
-      <Text style={styles.result}>{result}</Text>
-      <Button title="Show Action Sheet" onPress={onPress} />
+      {/* <Text style={styles.result}>{result}</Text>
+      <Button title="Show Action Sheet" onPress={onPress} /> */}
+
+      {/* <TextInput
+        style={styles.input_v3}
+        onChangeText={(text) => setName(text)}
+        placeholder="Enter Your Name !!!"
+        value={name}
+      />
+      <TouchableOpacity
+        onPress={() => Alert.alert("Welcome", "Hello " + name + ", Welcome to our app")}
+        onLongPress={onLongPress}
+      >
+        <View style={styles.button}>
+          <Text>Submit</Text>
+        </View>
+      </TouchableOpacity> */}
+
+      {/* <Text>{name}</Text>
+      <Button title="click" onPress={clickMe} /> */}
+
+      {/* <Text style={[styles.title, styles.textStyle]}>Vibration API</Text>
+      <View>
+        <Button title="Vibrate once" onPress={() => Vibration.vibrate()} />
+      </View>
+
+      <View>
+        <Button
+          title="Vibrate for 10 seconds"
+          onPress={() => Vibration.vibrate(10 * ONE_SECOND_IN_MS)}
+        />
+      </View>
+
+      <Button title="Vibrate with pattern" onPress={() => Vibration.vibrate(PATTERN)} />
+
+      <Text style={styles.title}>Pattern: {PATTERN_DESC}</Text>
+      <Button
+        title="Vibrate with pattern until cancelled"
+        onPress={() => Vibration.vibrate(PATTERN, true)}
+      />
+
+      <Button
+        title="Vibrate with pattern until cancelled"
+        onPress={() => Vibration.cancel()}
+        color="#FF0000"
+      /> */}
+
+      <Text style={{ fontSize: 40, fontWeight: "bold", opacity: range }}>Visible</Text>
+      <Text style={{ fontSize: 40, fontWeight: "bold" }}>{Math.floor(range * 100)}</Text>
+      <Slider
+        style={{ width: 200, height: 40 }}
+        minimumValue={0}
+        maximumValue={1}
+        minimumTrackTintColor="#000000"
+        maximumTrackTintColor="#cccccc"
+        onValueChange={(value) => setRange(value)}
+        thumbTintColor="yellow"
+      />
     </View>
   );
 }
 
-// 7:47
+// 8:44

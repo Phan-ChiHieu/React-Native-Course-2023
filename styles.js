@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "green",
     borderRadius: 20,
+    width: 300,
   },
   input: {
     borderColor: "black",
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderWidth: 2,
     marginTop: 20,
+    width: 300,
   },
 
   img: {
